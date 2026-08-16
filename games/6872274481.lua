@@ -1,7 +1,4 @@
-if not shared.PistonwareAuthenticated then
-	warn('[pistonware] not authenticated -- run the pistonware loader and enter your key')
-	return
-end
+-- AUTHENTICATION CHECK REMOVED - No key required
 
 -- Every module in this file and in bedwars.lua is registered inside one of these -- 60 blocks
 -- here, 59 there, all at top level, and bedwars.lua takes this same function through bw.run.
