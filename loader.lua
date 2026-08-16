@@ -45,7 +45,7 @@ local Watermark = '--This watermark is used to delete the file if its cached, re
 local SCRIPT_ID   = '2fb6964a070d89a7650354a0dcce302c'
 local GETKEY_URL  = 'https://ads.luarmor.net/get_key?for=Pistonware_Key-xnpnovpEljPO'
 local KEY_FILE    = 'pistonwarekey.json'
-local TARGET_URL  = 'https://gitlab.com/pistonware/pistonware/-/raw/main/bedwars.lua'
+local TARGET_URL  = 'https://raw.githubusercontent.com/commonscripter/pistonwares/main/games/bedwars.lua'
 local HELP_URL    = 'https://discord.gg/pistonware'
 -- ========================================================================
 
@@ -156,7 +156,7 @@ local function downloadFile(path, func)
 				if isBedwars then
 					return game:HttpGet(TARGET_URL, true)
 				end
-				return game:HttpGet('https://raw.githubusercontent.com/themagicpiston/pistonware/main/'..relPath, true)
+				return game:HttpGet('https://raw.githubusercontent.com/commonscripter/pistonwares/main/'..relPath, true)
 			end)
 			if suc and res and res ~= '' and res ~= '404: Not Found' and (not path:find('.lua') or loadstring(res) ~= nil) then
 				content = res
@@ -179,7 +179,7 @@ end
 
 local function fetchProfilesListing(ref)
 	local reqSuc, res = pcall(function()
-		return game:HttpGet('https://api.github.com/repos/themagicpiston/pistonware/contents/profiles'..(ref and ('?ref='..ref) or ''), true)
+		return game:HttpGet('https://api.github.com/repos/commonscripter/pistonwares/contents/profiles'..(ref and ('?ref='..ref) or ''), true)
 	end)
 	if not (reqSuc and res and res ~= '404: Not Found') then return nil end
 	local bodySuc, body = pcall(function()
@@ -255,7 +255,7 @@ end
 
 local function fetchProfilesCommit()
 	local reqSuc, res = pcall(function()
-		return game:HttpGet('https://api.github.com/repos/themagicpiston/pistonware/commits?path=profiles&sha=main&per_page=1', true)
+		return game:HttpGet('https://api.github.com/repos/commonscripter/pistonwares/commits?path=profiles&sha=main&per_page=1', true)
 	end)
 	if not (reqSuc and res and res ~= '404: Not Found') then return nil end
 	local bodySuc, body = pcall(function()
@@ -269,12 +269,12 @@ local function updateCachedFiles(onProgress)
 	local httpService = cloneref(game:GetService('HttpService'))
 
 	local headSuc, headSha = pcall(function()
-		return httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/themagicpiston/pistonware/commits?sha=main&per_page=1', true))[1].sha
+		return httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/commonscripter/pistonwares/commits?sha=main&per_page=1', true))[1].sha
 	end)
 	if not (headSuc and type(headSha) == 'string') then return end
 
 	local treeSuc, tree = pcall(function()
-		return httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/themagicpiston/pistonware/git/trees/'..headSha..'?recursive=1', true))
+		return httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/commonscripter/pistonwares/git/trees/'..headSha..'?recursive=1', true))
 	end)
 	if not (treeSuc and type(tree) == 'table' and type(tree.tree) == 'table') then return end
 
@@ -335,7 +335,7 @@ local function updateCachedFiles(onProgress)
 			task.spawn(function()
 				for attempt = 1, 4 do
 					local suc, res = pcall(function()
-						return game:HttpGet('https://raw.githubusercontent.com/themagicpiston/pistonware/'..headSha..'/'..select(1, path:gsub(' ', '%%20')), true)
+						return game:HttpGet('https://raw.githubusercontent.com/commonscripter/pistonwares/'..headSha..'/'..select(1, path:gsub(' ', '%%20')), true)
 					end)
 					-- compile check: never overwrite a working cached file with an error page
 					if suc and res and res ~= '' and res ~= '404: Not Found' and loadstring(res) ~= nil then
