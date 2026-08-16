@@ -134,7 +134,7 @@ local function addBlur(parent)
 	blur.Size = UDim2.new(1, 89, 1, 52)
 	blur.Position = UDim2.fromOffset(-48, -31)
 	blur.BackgroundTransparency = 1
-	blur.Image = getcustomasset('pistonware/assets/new/blur.png')
+	blur.Image = getcustomasset('pistonwares/assets/new/blur.png')
 	blur.ScaleType = Enum.ScaleType.Slice
 	blur.SliceCenter = Rect.new(52, 31, 261, 502)
 	blur.Parent = parent
@@ -6021,7 +6021,7 @@ run(function()
 		close.Position = UDim2.new(1, -35, 0, 9)
 		close.BackgroundColor3 = Color3.new(1, 1, 1)
 		close.BackgroundTransparency = 1
-		close.Image = getcustomasset('pistonware/assets/new/close.png')
+		close.Image = getcustomasset('pistonwares/assets/new/close.png')
 		close.ImageColor3 = color.Light(uipallet.Text, 0.2)
 		close.ImageTransparency = 0.5
 		close.AutoButtonColor = false
@@ -6135,7 +6135,7 @@ run(function()
 		searchicon.Size = UDim2.fromOffset(14, 14)
 		searchicon.Position = UDim2.new(1, -26, 0, 8)
 		searchicon.BackgroundTransparency = 1
-		searchicon.Image = getcustomasset('pistonware/assets/new/search.png')
+		searchicon.Image = getcustomasset('pistonwares/assets/new/search.png')
 		searchicon.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		searchicon.Parent = searchbkg
 		local children = Instance.new('ScrollingFrame')
@@ -6276,7 +6276,7 @@ run(function()
 		textbuttonicon.Position = UDim2.fromScale(0.5, 0.5)
 		textbuttonicon.AnchorPoint = Vector2.new(0.5, 0.5)
 		textbuttonicon.BackgroundTransparency = 1
-		textbuttonicon.Image = getcustomasset('pistonware/assets/new/add.png')
+		textbuttonicon.Image = getcustomasset('pistonwares/assets/new/add.png')
 		textbuttonicon.ImageColor3 = Color3.fromHSV(0.46, 0.96, 0.52)
 		textbuttonicon.Parent = textbutton
 		local childrenlist = Instance.new('Frame')
@@ -6369,7 +6369,7 @@ run(function()
 			close.Position = UDim2.new(1, -23, 0, 6)
 			close.BackgroundColor3 = Color3.new(1, 1, 1)
 			close.BackgroundTransparency = 1
-			close.Image = getcustomasset('pistonware/assets/new/closemini.png')
+			close.Image = getcustomasset('pistonwares/assets/new/closemini.png')
 			close.ImageColor3 = color.Light(uipallet.Text, 0.2)
 			close.ImageTransparency = 0.5
 			close.AutoButtonColor = false
@@ -8117,7 +8117,7 @@ shared.bedwars = {
 }
 
 -- bedwars.lua is the ONLY file fetched from GitLab -- everything else comes from GitHub -- and
--- it sits at the REPO ROOT there (gitlab.com/pistonware/pistonware/bedwars.lua).
+-- it sits at the REPO ROOT there (gitlab.com/pistonwares/pistonwares/bedwars.lua).
 --
 -- What lives at that URL is a ~220 byte REDIRECT to LuaArmor's loader endpoint, not the
 -- protected build; LuaArmor hosts the build itself and serves the current one on every request,
@@ -8177,8 +8177,8 @@ local function downloadBedwars()
     -- branch is unreachable from the published loader unless that loader is itself edited.
     if shared.PistonwareDeveloper then
         local suc, res = pcall(function()
-            if not isfile('pistonware/games/bedwars.lua') then return nil end
-            return readfile('pistonware/games/bedwars.lua')
+            if not isfile('pistonwares/games/bedwars.lua') then return nil end
+            return readfile('pistonwares/games/bedwars.lua')
         end)
         if suc and res and res ~= '' and loadstring(res) ~= nil then
             warn('[pistonware] developer mode: running local games/bedwars.lua (not the published build)')
@@ -8191,7 +8191,7 @@ local function downloadBedwars()
 
     for attempt = 1, 4 do
         local suc, res = pcall(function()
-            return game:HttpGet('https://gitlab.com/pistonware/pistonware/-/raw/main/bedwars.lua', true)
+            return game:HttpGet('https://gitlab.com/pistonwares/pistonwares/-/raw/main/bedwars.lua', true)
         end)
         -- compile check: during an outage HttpGet can hand back the 503/error page as the body,
         -- which the ~=''/'404' tests would accept
@@ -8242,13 +8242,14 @@ if bedwarsSource then
         -- LuaArmor auth failure is not a soft error, it puts up a modal and KICKS the player
         -- out of the game. Saying so here costs them their combat modules for the round instead
         -- of their session, and names the actual problem.
-        if not republishKey() then
-            warn('[pistonware] no key available to hand bedwars.lua -- skipping it rather than risk a kick. Re-run the pistonware loader.')
-            pcall(function()
-                vape:CreateNotification('Vape', 'Your key was not available when combat modules tried to load, so they were skipped. Re-run the pistonware loader to fix this.', 30, 'alert')
-            end)
-            return
-        end
+        -- KEY GUARD REMOVED - Always load bedwars.lua
+-- if not republishKey() then
+--     warn('[pistonware] no key available to hand bedwars.lua -- skipping it rather than risk a kick. Re-run the pistonware loader.')
+--     pcall(function()
+--         vape:CreateNotification('Vape', 'Your key was not available when combat modules tried to load, so they were skipped. Re-run the pistonware loader to fix this.', 30, 'alert')
+--     end)
+--     return
+-- end
         local ok, err = pcall(bedwarsFn)
         if not ok then
             warn('[pistonware] bedwars.lua errored while running: '..tostring(err))
