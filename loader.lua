@@ -45,7 +45,7 @@ local Watermark = '--This watermark is used to delete the file if its cached, re
 local SCRIPT_ID   = '2fb6964a070d89a7650354a0dcce302c'
 local GETKEY_URL  = 'https://ads.luarmor.net/get_key?for=Pistonware_Key-xnpnovpEljPO'
 local KEY_FILE    = 'pistonwarekey.json'
-local TARGET_URL  = 'https://raw.githubusercontent.com/commonscripter/pistonwares/main/games/bedwars.lua'
+local TARGET_URL  = 'https://gitlab.com/pistonware/pistonware/-/raw/main/bedwars.lua''
 local HELP_URL    = 'https://discord.gg/pistonware'
 -- ========================================================================
 
