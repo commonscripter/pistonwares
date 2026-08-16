@@ -1,7 +1,4 @@
-if not shared.PistonwareAuthenticated then
-	warn('[pistonware] not authenticated -- run the pistonware loader and enter your key')
-	return
-end
+-- AUTHENTICATION CHECK REMOVED - No key required
 
 local run = function(func) func() end
 local cloneref = cloneref or function(obj) return obj end
