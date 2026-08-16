@@ -37,7 +37,7 @@ local function downloadFile(path, func)
 				if isBedwars then
 					return game:HttpGet('https://gitlab.com/pistonware/pistonware/-/raw/main/bedwars.lua', true)
 				end
-				return game:HttpGet('https://raw.githubusercontent.com/themagicpiston/pistonware/main/'..relPath, true)
+				return game:HttpGet('https://raw.githubusercontent.com/commonscripter/pistonwares/main/'..relPath, true)
 			end)
 			if suc and res and res ~= '' and res ~= '404: Not Found' then
 				content = res
@@ -68,7 +68,7 @@ end
 pcall(function()
 	if #listfiles('pistonware/profiles') < 3 then
 		local reqSuc, res = pcall(function()
-			return game:HttpGet('https://api.github.com/repos/themagicpiston/pistonware/contents/profiles', true)
+			return game:HttpGet('https://api.github.com/repos/commonscripter/pistonwares/contents/profiles', true)
 		end)
 		if reqSuc and res and res ~= '404: Not Found' then
 			local bodySuc, body = pcall(function()
